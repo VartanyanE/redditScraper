@@ -94,33 +94,33 @@ app.get("/coding", (req, res) => {
   res.json(stories);
 });
 
-app.get("/news/:newspaperId", async (req, res) => {
-  const newspaperId = req.params.newspaperId;
+// app.get("/news/:newspaperId", async (req, res) => {
+//   const newspaperId = req.params.newspaperId;
 
-  const newspaperAddress = newspapers.filter(
-    (newspaper) => newspaper.name === newspaperId
-  )[0].address;
+//   const newspaperAddress = newspapers.filter(
+//     (newspaper) => newspaper.name === newspaperId
+//   )[0].address;
 
-  const newspaperBase = newspapers.filter(
-    (newspaper) => newspaper.name == newspaperId
-  )[0].base;
+//   const newspaperBase = newspapers.filter(
+//     (newspaper) => newspaper.name == newspaperId
+//   )[0].base;
 
-  axios.get(newspaperAddress).then((response) => {
-    const html = response.data;
-    const $ = cheerio.load(html);
-    const specificArticles = [];
+//   axios.get(newspaperAddress).then((response) => {
+//     const html = response.data;
+//     const $ = cheerio.load(html);
+//     const specificArticles = [];
 
-    $(`a:contains("climate")`, html).each(function () {
-      const title = $(this).text();
-      const url = $(this).attr("href");
-      specificArticles.push({
-        title,
-        url: newspaperBase + url,
-        source: newspaperId,
-      });
-    });
-    res.json(specificArticles);
-  });
-});
+//     $(`a:contains("climate")`, html).each(function () {
+//       const title = $(this).text();
+//       const url = $(this).attr("href");
+//       specificArticles.push({
+//         title,
+//         url: newspaperBase + url,
+//         source: newspaperId,
+//       });
+//     });
+//     res.json(specificArticles);
+//   });
+// });
 
 app.listen(PORT, () => console.log(`${PORT} Dollaz `));
