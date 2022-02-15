@@ -7,61 +7,77 @@ const app = express();
 
 const coding_subs = [
   {
-    name: "r/webdev",
+    name: "webdev",
     address: "https://www.reddit.com/r/webdev/",
     base: "https://www.reddit.com",
   },
   {
-    name: "r/programming",
+    name: "programming",
     address: "https://www.reddit.com/r/programming/",
     base: "https://www.reddit.com",
   },
   {
-    name: "r/code",
+    name: "code",
     address: "https://www.reddit.com/r/code/",
     base: "https://www.reddit.com",
   },
   {
-    name: "r/computer_science",
+    name: "computer_science",
     address: "https://www.reddit.com/r/computerscience/",
     base: "https://www.reddit.com",
   },
   {
-    name: "r/coding",
+    name: "coding",
     address: "https://www.reddit.com/r/coding/",
     base: "https://www.reddit.com",
   },
   {
-    name: "r/javascript",
+    name: "javascript",
     address: "https://www.reddit.com/r/javascript/",
     base: "https://www.reddit.com",
   },
   {
-    name: "r/c#",
+    name: "c#",
     address: "https://www.reddit.com/r/csharp/",
     base: "https://www.reddit.com",
   },
   {
-    name: "r/python",
+    name: "python",
     address: "https://www.reddit.com/r/python/",
     base: "https://www.reddit.com",
   },
   {
-    name: "r/node",
+    name: "node",
     address: "https://www.reddit.com/r/node/",
     base: "https://www.reddit.com",
   },
   {
-    name: "r/java",
+    name: "java",
     address: "https://www.reddit.com/r/java/",
     base: "https://www.reddit.com",
   },
+  {
+    name: "technology",
+    address: "https://www.reddit.com/r/technology/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "html",
+    address: "https://www.reddit.com/r/html/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "css",
+    address: "https://www.reddit.com/r/css/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "daily_programmer",
+    address: "https://www.reddit.com/r/dailyprogrammer/",
+    base: "https://www.reddit.com",
+  },
 
-  //   {
-  //     name: "telegraph",
-  //     address: "https://www.telegraph.co.uk/climate-change",
-  //     base: "https://www.telegraph.co.uk",
-  //   },
+
 ];
 
 coding_subs.forEach((sub) => {
@@ -75,7 +91,7 @@ coding_subs.forEach((sub) => {
         const title = $(this).text();
         const url = $(this).attr("href");
 
-        stories.push({
+        coding.push({
           title,
           url: sub.base + url,
           subreddit: sub.name,
@@ -85,13 +101,13 @@ coding_subs.forEach((sub) => {
     .catch((err) => console.log(err));
 });
 
-const stories = [];
+const coding = [];
 app.get("/", (req, res) => {
   res.json("Welcome");
 });
 
 app.get("/coding", (req, res) => {
-  res.json(stories);
+  res.json(coding);
 });
 
 // app.get("/news/:newspaperId", async (req, res) => {
