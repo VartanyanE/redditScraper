@@ -5,7 +5,7 @@ const cheerio = require("cheerio");
 
 const app = express();
 
-const coding_subs = [
+const codingRoutes = [
   {
     name: "webdev",
     address: "https://www.reddit.com/r/webdev/",
@@ -76,11 +76,109 @@ const coding_subs = [
     address: "https://www.reddit.com/r/dailyprogrammer/",
     base: "https://www.reddit.com",
   },
-
-
 ];
 
-coding_subs.forEach((sub) => {
+const sportsRoutes = [
+  {
+    name: "nfl",
+    address: "https://www.reddit.com/r/nfl/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "nba",
+    address: "https://www.reddit.com/r/nba/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "soccer",
+    address: "https://www.reddit.com/r/soccer/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "hockey",
+    address: "https://www.reddit.com/r/hockey/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "baseball",
+    address: "https://www.reddit.com/r/baseball/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "golf",
+    address: "https://www.reddit.com/r/golf/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "sports",
+    address: "https://www.reddit.com/r/sports/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "premierLeague",
+    address: "https://www.reddit.com/r/premierleague/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "formula1",
+    address: "https://www.reddit.com/r/formula1/",
+    base: "https://www.reddit.com",
+  },
+];
+
+const cryptoRoutes = [
+  {
+    name: "crypto",
+    address: "https://www.reddit.com/r/crypto/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "crypto_currency_news",
+    address: "https://www.reddit.com/r/crypto_currency_news/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "cryptocurrencies",
+    address: "https://www.reddit.com/r/cryptocurrencies/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "shibarmy",
+    address: "https://www.reddit.com/r/shibarmy/",
+    base: "https://www.reddit.com",
+  },
+  // {
+  //   name: "baseball",
+  //   address: "https://www.reddit.com/r/baseball/",
+  //   base: "https://www.reddit.com",
+  // },
+  // {
+  //   name: "golf",
+  //   address: "https://www.reddit.com/r/golf/",
+  //   base: "https://www.reddit.com",
+  // },
+  // {
+  //   name: "sports",
+  //   address: "https://www.reddit.com/r/sports/",
+  //   base: "https://www.reddit.com",
+  // },
+  // {
+  //   name: "premierLeague",
+  //   address: "https://www.reddit.com/r/premierleague/",
+  //   base: "https://www.reddit.com",
+  // },
+  // {
+  //   name: "formula1",
+  //   address: "https://www.reddit.com/r/formula1/",
+  //   base: "https://www.reddit.com",
+  // },
+];
+
+const codingArray = [];
+const sportsArray = [];
+const cryptoArray = [];
+
+codingRoutes.forEach((sub) => {
   axios
     .get(sub.address)
     .then((response) => {
@@ -91,7 +189,7 @@ coding_subs.forEach((sub) => {
         const title = $(this).text();
         const url = $(this).attr("href");
 
-        coding.push({
+        codingArray.push({
           title,
           url: sub.base + url,
           subreddit: sub.name,
@@ -101,13 +199,62 @@ coding_subs.forEach((sub) => {
     .catch((err) => console.log(err));
 });
 
-const coding = [];
+sportsRoutes.forEach((sub) => {
+  axios
+    .get(sub.address)
+    .then((response) => {
+      const html = response.data;
+      const $ = cheerio.load(html);
+
+      $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+        const title = $(this).text();
+        const url = $(this).attr("href");
+
+        sportsArray.push({
+          title,
+          url: sub.base + url,
+          subreddit: sub.name,
+        });
+      });
+    })
+    .catch((err) => console.log(err));
+});
+
+cryptoRoutes.forEach((sub) => {
+  axios
+    .get(sub.address)
+    .then((response) => {
+      const html = response.data;
+      const $ = cheerio.load(html);
+
+      $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+        const title = $(this).text();
+        const url = $(this).attr("href");
+
+        cryptoArray.push({
+          title,
+          url: sub.base + url,
+          subreddit: sub.name,
+        });
+      });
+    })
+    .catch((err) => console.log(err));
+});
+
 app.get("/", (req, res) => {
   res.json("Welcome");
 });
 
 app.get("/coding", (req, res) => {
-  res.json(coding);
+  res.json(codingArray);
+});
+
+app.get("/sports", (req, res) => {
+  res.json(sportsArray);
+});
+
+app.get("/crypto", (req, res) => {
+  res.json(cryptoArray);
 });
 
 // app.get("/news/:newspaperId", async (req, res) => {
