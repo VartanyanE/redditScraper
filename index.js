@@ -167,12 +167,55 @@ const cryptoRoutes = [
     address: "https://www.reddit.com/r/ethereum/",
     base: "https://www.reddit.com",
   },
- 
+];
+
+const comedyRoutes = [
+  {
+    name: "comedyheaven",
+    address: "https://www.reddit.com/r/comedyheaven/",
+    base: "https://www.reddit.com",
+  },
+  // {
+  //   name: "crypto_currency_news",
+  //   address: "https://www.reddit.com/r/crypto_currency_news/",
+  //   base: "https://www.reddit.com",
+  // },
+  // {
+  //   name: "cryptocurrencies",
+  //   address: "https://www.reddit.com/r/cryptocurrencies/",
+  //   base: "https://www.reddit.com",
+  // },
+  // {
+  //   name: "shibarmy",
+  //   address: "https://www.reddit.com/r/shibarmy/",
+  //   base: "https://www.reddit.com",
+  // },
+  // {
+  //   name: "cryptomoonshots",
+  //   address: "https://www.reddit.com/r/cryptomoonshots/",
+  //   base: "https://www.reddit.com",
+  // },
+  // {
+  //   name: "bitcoin",
+  //   address: "https://www.reddit.com/r/bitcoin/",
+  //   base: "https://www.reddit.com",
+  // },
+  // {
+  //   name: "dogecoin",
+  //   address: "https://www.reddit.com/r/dogecoin/",
+  //   base: "https://www.reddit.com",
+  // },
+  // {
+  //   name: "ethereum",
+  //   address: "https://www.reddit.com/r/ethereum/",
+  //   base: "https://www.reddit.com",
+  // },
 ];
 
 const codingArray = [];
 const sportsArray = [];
 const cryptoArray = [];
+const comedyArray = [];
 
 codingRoutes.forEach((sub) => {
   axios
@@ -237,6 +280,27 @@ cryptoRoutes.forEach((sub) => {
     .catch((err) => console.log(err));
 });
 
+comedyRoutes.forEach((sub) => {
+  axios
+    .get(sub.address)
+    .then((response) => {
+      const html = response.data;
+      const $ = cheerio.load(html);
+
+      $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+        const title = $(this).text();
+        const url = $(this).attr("href");
+
+        comedyArray.push({
+          title,
+          url: sub.base + url,
+          subreddit: sub.name,
+        });
+      });
+    })
+    .catch((err) => console.log(err));
+});
+
 app.get("/", (req, res) => {
   res.json("Welcome");
 });
@@ -251,6 +315,10 @@ app.get("/sports", (req, res) => {
 
 app.get("/crypto", (req, res) => {
   res.json(cryptoArray);
+});
+
+app.get("/comedy", (req, res) => {
+  res.json(comedyArray);
 });
 
 // app.get("/news/:newspaperId", async (req, res) => {
