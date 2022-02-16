@@ -147,31 +147,27 @@ const cryptoRoutes = [
     address: "https://www.reddit.com/r/shibarmy/",
     base: "https://www.reddit.com",
   },
-  // {
-  //   name: "baseball",
-  //   address: "https://www.reddit.com/r/baseball/",
-  //   base: "https://www.reddit.com",
-  // },
-  // {
-  //   name: "golf",
-  //   address: "https://www.reddit.com/r/golf/",
-  //   base: "https://www.reddit.com",
-  // },
-  // {
-  //   name: "sports",
-  //   address: "https://www.reddit.com/r/sports/",
-  //   base: "https://www.reddit.com",
-  // },
-  // {
-  //   name: "premierLeague",
-  //   address: "https://www.reddit.com/r/premierleague/",
-  //   base: "https://www.reddit.com",
-  // },
-  // {
-  //   name: "formula1",
-  //   address: "https://www.reddit.com/r/formula1/",
-  //   base: "https://www.reddit.com",
-  // },
+  {
+    name: "cryptomoonshots",
+    address: "https://www.reddit.com/r/cryptomoonshots/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "bitcoin",
+    address: "https://www.reddit.com/r/bitcoin/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "dogecoin",
+    address: "https://www.reddit.com/r/dogecoin/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "ethereum",
+    address: "https://www.reddit.com/r/ethereum/",
+    base: "https://www.reddit.com",
+  },
+ 
 ];
 
 const codingArray = [];
@@ -286,4 +282,4 @@ app.get("/crypto", (req, res) => {
 //   });
 // });
 
-app.listen(PORT, () => console.log(`${PORT} Dollaz `));
+app.listen(PORT, () => console.log(`PORT ${PORT} Dollaz `));
