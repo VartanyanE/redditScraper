@@ -175,47 +175,81 @@ const comedyRoutes = [
     address: "https://www.reddit.com/r/comedyheaven/",
     base: "https://www.reddit.com",
   },
-  // {
-  //   name: "crypto_currency_news",
-  //   address: "https://www.reddit.com/r/crypto_currency_news/",
-  //   base: "https://www.reddit.com",
-  // },
-  // {
-  //   name: "cryptocurrencies",
-  //   address: "https://www.reddit.com/r/cryptocurrencies/",
-  //   base: "https://www.reddit.com",
-  // },
-  // {
-  //   name: "shibarmy",
-  //   address: "https://www.reddit.com/r/shibarmy/",
-  //   base: "https://www.reddit.com",
-  // },
-  // {
-  //   name: "cryptomoonshots",
-  //   address: "https://www.reddit.com/r/cryptomoonshots/",
-  //   base: "https://www.reddit.com",
-  // },
-  // {
-  //   name: "bitcoin",
-  //   address: "https://www.reddit.com/r/bitcoin/",
-  //   base: "https://www.reddit.com",
-  // },
-  // {
-  //   name: "dogecoin",
-  //   address: "https://www.reddit.com/r/dogecoin/",
-  //   base: "https://www.reddit.com",
-  // },
-  // {
-  //   name: "ethereum",
-  //   address: "https://www.reddit.com/r/ethereum/",
-  //   base: "https://www.reddit.com",
-  // },
+  {
+    name: "funny",
+    address: "https://www.reddit.com/r/funny/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "standupcomedy",
+    address: "https://www.reddit.com/r/standupcomedy/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "dankmemes",
+    address: "https://www.reddit.com/r/dankmemes/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "jokes",
+    address: "https://www.reddit.com/r/jokes/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "funnyandsad",
+    address: "https://www.reddit.com/r/funnyandsad/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "comedycemetery",
+    address: "https://www.reddit.com/r/comedycemetery/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "funnyvideos",
+    address: "https://www.reddit.com/r/funnyvideos/",
+    base: "https://www.reddit.com",
+  },
+];
+
+const newsRoutes = [
+  {
+    name: "news",
+    address: "https://www.reddit.com/r/news/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "conspiracy",
+    address: "https://www.reddit.com/r/conspiracy/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "politics",
+    address: "https://www.reddit.com/r/politics/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "worldnews",
+    address: "https://www.reddit.com/r/worldnews/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "conservative",
+    address: "https://www.reddit.com/r/conservative/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "democrats",
+    address: "https://www.reddit.com/r/democrats/",
+    base: "https://www.reddit.com",
+  },
 ];
 
 const codingArray = [];
 const sportsArray = [];
 const cryptoArray = [];
 const comedyArray = [];
+const newsArray = [];
 
 codingRoutes.forEach((sub) => {
   axios
@@ -301,6 +335,27 @@ comedyRoutes.forEach((sub) => {
     .catch((err) => console.log(err));
 });
 
+newsRoutes.forEach((sub) => {
+  axios
+    .get(sub.address)
+    .then((response) => {
+      const html = response.data;
+      const $ = cheerio.load(html);
+
+      $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+        const title = $(this).text();
+        const url = $(this).attr("href");
+
+        newsArray.push({
+          title,
+          url: sub.base + url,
+          subreddit: sub.name,
+        });
+      });
+    })
+    .catch((err) => console.log(err));
+});
+
 app.get("/", (req, res) => {
   res.json("Welcome");
 });
@@ -321,33 +376,145 @@ app.get("/comedy", (req, res) => {
   res.json(comedyArray);
 });
 
-// app.get("/news/:newspaperId", async (req, res) => {
-//   const newspaperId = req.params.newspaperId;
+app.get("/news", (req, res) => {
+  res.json(newsArray);
+});
 
-//   const newspaperAddress = newspapers.filter(
-//     (newspaper) => newspaper.name === newspaperId
-//   )[0].address;
+app.get("/coding/:codingId", async (req, res) => {
+  const codingId = req.params.codingId;
 
-//   const newspaperBase = newspapers.filter(
-//     (newspaper) => newspaper.name == newspaperId
-//   )[0].base;
+  const codingAddress = codingRoutes.filter((code) => code.name === codingId)[0]
+    .address;
 
-//   axios.get(newspaperAddress).then((response) => {
-//     const html = response.data;
-//     const $ = cheerio.load(html);
-//     const specificArticles = [];
+  const codingBase = codingRoutes.filter((code) => code.name == codingId)[0]
+    .base;
 
-//     $(`a:contains("climate")`, html).each(function () {
-//       const title = $(this).text();
-//       const url = $(this).attr("href");
-//       specificArticles.push({
-//         title,
-//         url: newspaperBase + url,
-//         source: newspaperId,
-//       });
-//     });
-//     res.json(specificArticles);
-//   });
-// });
+  axios.get(codingAddress).then((response) => {
+    const html = response.data;
+    const $ = cheerio.load(html);
+    const specificArticles = [];
+
+    $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+      const title = $(this).text();
+      const url = $(this).attr("href");
+      specificArticles.push({
+        title,
+        url: codingBase + url,
+        source: codingId,
+      });
+    });
+    res.json(specificArticles);
+  });
+});
+
+app.get("/sports/:sportsId", async (req, res) => {
+  const sportsId = req.params.sportsId;
+
+  const sportsAddress = sportsRoutes.filter(
+    (sport) => sport.name === sportsId,
+  )[0].address;
+
+  const sportsBase = sportsRoutes.filter((sport) => sport.name == sportsId)[0]
+    .base;
+
+  axios.get(sportsAddress).then((response) => {
+    const html = response.data;
+    const $ = cheerio.load(html);
+    const sportsPosts = [];
+
+    $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+      const title = $(this).text();
+      const url = $(this).attr("href");
+      sportsPosts.push({
+        title,
+        url: sportsBase + url,
+        source: sportsId,
+      });
+    });
+    res.json(sportsPosts);
+  });
+});
+
+app.get("/crypto/:cryptoId", async (req, res) => {
+  const cryptoId = req.params.cryptoId;
+
+  const cryptoAddress = cryptoRoutes.filter(
+    (crypto) => crypto.name === cryptoId,
+  )[0].address;
+
+  const cryptoBase = cryptoRoutes.filter((crypto) => crypto.name == cryptoId)[0]
+    .base;
+
+  axios.get(cryptoAddress).then((response) => {
+    const html = response.data;
+    const $ = cheerio.load(html);
+    const cryptoPosts = [];
+
+    $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+      const title = $(this).text();
+      const url = $(this).attr("href");
+      cryptoPosts.push({
+        title,
+        url: cryptoBase + url,
+        source: cryptoId,
+      });
+    });
+    res.json(cryptoPosts);
+  });
+});
+
+app.get("/comedy/:comedyId", async (req, res) => {
+  const comedyId = req.params.comedyId;
+
+  const comedyAddress = comedyRoutes.filter(
+    (comedy) => comedy.name === comedyId,
+  )[0].address;
+
+  const comedyBase = comedyRoutes.filter((comedy) => comedy.name == comedyId)[0]
+    .base;
+
+  axios.get(comedyAddress).then((response) => {
+    const html = response.data;
+    const $ = cheerio.load(html);
+    const comedyPosts = [];
+
+    $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+      const title = $(this).text();
+      const url = $(this).attr("href");
+      comedyPosts.push({
+        title,
+        url: comedyBase + url,
+        source: comedyId,
+      });
+    });
+    res.json(comedyPosts);
+  });
+});
+
+app.get("/news/:newsId", async (req, res) => {
+  const newsId = req.params.newsId;
+
+  const newsAddress = newsRoutes.filter((news) => news.name === newsId)[0]
+    .address;
+
+  const newsBase = newsRoutes.filter((news) => news.name == newsId)[0].base;
+
+  axios.get(newsAddress).then((response) => {
+    const html = response.data;
+    const $ = cheerio.load(html);
+    const newsPosts = [];
+
+    $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+      const title = $(this).text();
+      const url = $(this).attr("href");
+      newsPosts.push({
+        title,
+        url: newsBase + url,
+        source: newsId,
+      });
+    });
+    res.json(newsPosts);
+  });
+});
 
 app.listen(PORT, () => console.log(`PORT ${PORT} Dollaz `));
