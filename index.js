@@ -245,11 +245,45 @@ const newsRoutes = [
   },
 ];
 
+const musicRoutes = [
+  {
+    name: "music",
+    address: "https://www.reddit.com/r/music/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "letstalkmusic",
+    address: "https://www.reddit.com/r/letstalkmusic/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "hiphopheads",
+    address: "https://www.reddit.com/r/hiphopheads/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "guitar",
+    address: "https://www.reddit.com/r/guitar/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "electronicmusic",
+    address: "https://www.reddit.com/r/electronicmusic/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "spotify",
+    address: "https://www.reddit.com/r/spotify/",
+    base: "https://www.reddit.com",
+  },
+];
+
 const codingArray = [];
 const sportsArray = [];
 const cryptoArray = [];
 const comedyArray = [];
 const newsArray = [];
+const musicArray = [];
 
 codingRoutes.forEach((sub) => {
   axios
@@ -356,6 +390,27 @@ newsRoutes.forEach((sub) => {
     .catch((err) => console.log(err));
 });
 
+musicRoutes.forEach((sub) => {
+  axios
+    .get(sub.address)
+    .then((response) => {
+      const html = response.data;
+      const $ = cheerio.load(html);
+
+      $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+        const title = $(this).text();
+        const url = $(this).attr("href");
+
+        musicArray.push({
+          title,
+          url: sub.base + url,
+          subreddit: sub.name,
+        });
+      });
+    })
+    .catch((err) => console.log(err));
+});
+
 app.get("/", (req, res) => {
   res.json("Welcome");
 });
@@ -378,6 +433,10 @@ app.get("/comedy", (req, res) => {
 
 app.get("/news", (req, res) => {
   res.json(newsArray);
+});
+
+app.get("/music", (req, res) => {
+  res.json(musicArray);
 });
 
 app.get("/coding/:codingId", async (req, res) => {
@@ -514,6 +573,33 @@ app.get("/news/:newsId", async (req, res) => {
       });
     });
     res.json(newsPosts);
+  });
+});
+
+app.get("/music/:musicId", async (req, res) => {
+  const musicId = req.params.musicId;
+
+  const musicAddress = musicRoutes.filter((music) => music.name === musicId)[0]
+    .address;
+
+  const musicBase = musicRoutes.filter((music) => music.name == musicId)[0]
+    .base;
+
+  axios.get(musicAddress).then((response) => {
+    const html = response.data;
+    const $ = cheerio.load(html);
+    const musicPosts = [];
+
+    $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+      const title = $(this).text();
+      const url = $(this).attr("href");
+      musicPosts.push({
+        title,
+        url: musicBase + url,
+        source: musicId,
+      });
+    });
+    res.json(musicPosts);
   });
 });
 
