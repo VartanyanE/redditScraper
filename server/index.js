@@ -245,11 +245,79 @@ const newsRoutes = [
   },
 ];
 
+const musicRoutes = [
+  {
+    name: "music",
+    address: "https://www.reddit.com/r/music/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "letstalkmusic",
+    address: "https://www.reddit.com/r/letstalkmusic/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "hiphopheads",
+    address: "https://www.reddit.com/r/hiphopheads/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "guitar",
+    address: "https://www.reddit.com/r/guitar/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "electronicmusic",
+    address: "https://www.reddit.com/r/electronicmusic/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "spotify",
+    address: "https://www.reddit.com/r/spotify/",
+    base: "https://www.reddit.com",
+  },
+];
+
+const memeRoutes = [
+  {
+    name: "meme",
+    address: "https://www.reddit.com/r/meme/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "memesofthedank",
+    address: "https://www.reddit.com/r/memes_of_the_dank/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "dankmemes",
+    address: "https://www.reddit.com/r/dankmemes/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "memes",
+    address: "https://www.reddit.com/r/memes/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "historymemes",
+    address: "https://www.reddit.com/r/historymemes/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "memeeconomy",
+    address: "https://www.reddit.com/r/memeeconomy/",
+    base: "https://www.reddit.com",
+  },
+];
+
 const codingArray = [];
 const sportsArray = [];
 const cryptoArray = [];
 const comedyArray = [];
 const newsArray = [];
+const musicArray = [];
+const memeArray = [];
 
 codingRoutes.forEach((sub) => {
   axios
@@ -356,6 +424,48 @@ newsRoutes.forEach((sub) => {
     .catch((err) => console.log(err));
 });
 
+musicRoutes.forEach((sub) => {
+  axios
+    .get(sub.address)
+    .then((response) => {
+      const html = response.data;
+      const $ = cheerio.load(html);
+
+      $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+        const title = $(this).text();
+        const url = $(this).attr("href");
+
+        musicArray.push({
+          title,
+          url: sub.base + url,
+          subreddit: sub.name,
+        });
+      });
+    })
+    .catch((err) => console.log(err));
+});
+
+memeRoutes.forEach((sub) => {
+  axios
+    .get(sub.address)
+    .then((response) => {
+      const html = response.data;
+      const $ = cheerio.load(html);
+
+      $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+        const title = $(this).text();
+        const url = $(this).attr("href");
+
+        memeArray.push({
+          title,
+          url: sub.base + url,
+          subreddit: sub.name,
+        });
+      });
+    })
+    .catch((err) => console.log(err));
+});
+
 app.get("/", (req, res) => {
   res.json("Welcome");
 });
@@ -378,6 +488,14 @@ app.get("/comedy", (req, res) => {
 
 app.get("/news", (req, res) => {
   res.json(newsArray);
+});
+
+app.get("/music", (req, res) => {
+  res.json(musicArray);
+});
+
+app.get("/meme", (req, res) => {
+  res.json(memeArray);
 });
 
 app.get("/coding/:codingId", async (req, res) => {
@@ -514,6 +632,59 @@ app.get("/news/:newsId", async (req, res) => {
       });
     });
     res.json(newsPosts);
+  });
+});
+
+app.get("/music/:musicId", async (req, res) => {
+  const musicId = req.params.musicId;
+
+  const musicAddress = musicRoutes.filter((music) => music.name === musicId)[0]
+    .address;
+
+  const musicBase = musicRoutes.filter((music) => music.name == musicId)[0]
+    .base;
+
+  axios.get(musicAddress).then((response) => {
+    const html = response.data;
+    const $ = cheerio.load(html);
+    const musicPosts = [];
+
+    $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+      const title = $(this).text();
+      const url = $(this).attr("href");
+      musicPosts.push({
+        title,
+        url: musicBase + url,
+        source: musicId,
+      });
+    });
+    res.json(musicPosts);
+  });
+});
+
+app.get("/meme/:memeId", async (req, res) => {
+  const memeId = req.params.memeId;
+
+  const memeAddress = memeRoutes.filter((meme) => meme.name === memeId)[0]
+    .address;
+
+  const memeBase = memeRoutes.filter((meme) => meme.name == memeId)[0].base;
+
+  axios.get(memeAddress).then((response) => {
+    const html = response.data;
+    const $ = cheerio.load(html);
+    const memePosts = [];
+
+    $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+      const title = $(this).text();
+      const url = $(this).attr("href");
+      memePosts.push({
+        title,
+        url: memeBase + url,
+        source: memeId,
+      });
+    });
+    res.json(memePosts);
   });
 });
 
