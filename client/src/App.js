@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 
 function App() {
   const data = () => {
-    fetch("http://localhost:8000/coding")
+    fetch("http://localhost:8000/finance/wallstreetbets")
       .then((response) => response.json())
       .then((data) => console.log(data));
   };

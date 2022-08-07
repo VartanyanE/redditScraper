@@ -315,6 +315,39 @@ const memeRoutes = [
   },
 ];
 
+const financeRoutes = [
+  {
+    name: "personalfinance",
+    address: "https://www.reddit.com/r/personalfinance/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "stocks",
+    address: "https://www.reddit.com/r/stocks/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "business",
+    address: "https://www.reddit.com/r/business/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "wallstreetbets",
+    address: "https://www.reddit.com/r/wallstreetbets/",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "robinhood",
+    address: "https://www.reddit.com/r/robinhood",
+    base: "https://www.reddit.com",
+  },
+  {
+    name: "investing",
+    address: "https://www.reddit.com/r/investing/",
+    base: "https://www.reddit.com",
+  },
+];
+
 const codingArray = [];
 const sportsArray = [];
 const cryptoArray = [];
@@ -322,6 +355,7 @@ const comedyArray = [];
 const newsArray = [];
 const musicArray = [];
 const memeArray = [];
+const financeArray = [];
 
 codingRoutes.forEach((sub) => {
   axios
@@ -470,6 +504,27 @@ memeRoutes.forEach((sub) => {
     .catch((err) => console.log(err));
 });
 
+financeRoutes.forEach((sub) => {
+  axios
+    .get(sub.address)
+    .then((response) => {
+      const html = response.data;
+      const $ = cheerio.load(html);
+
+      $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+        const title = $(this).text();
+        const url = $(this).attr("href");
+
+        financeArray.push({
+          title,
+          url: sub.base + url,
+          subreddit: sub.name,
+        });
+      });
+    })
+    .catch((err) => console.log(err));
+});
+
 app.get("/", (req, res) => {
   res.json("Welcome");
 });
@@ -500,6 +555,10 @@ app.get("/music", (req, res) => {
 
 app.get("/meme", (req, res) => {
   res.json(memeArray);
+});
+
+app.get("/finance", (req, res) => {
+  res.json(financeArray);
 });
 
 app.get("/coding/:codingId", async (req, res) => {
@@ -689,6 +748,35 @@ app.get("/meme/:memeId", async (req, res) => {
       });
     });
     res.json(memePosts);
+  });
+});
+
+app.get("/finance/:financeId", async (req, res) => {
+  const financeId = req.params.financeId;
+
+  const financeAddress = financeRoutes.filter(
+    (finance) => finance.name === financeId
+  )[0].address;
+
+  const financeBase = financeRoutes.filter(
+    (finance) => finance.name == financeId
+  )[0].base;
+
+  axios.get(financeAddress).then((response) => {
+    const html = response.data;
+    const $ = cheerio.load(html);
+    const financePosts = [];
+
+    $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
+      const title = $(this).text();
+      const url = $(this).attr("href");
+      financePosts.push({
+        title,
+        url: financeBase + url,
+        source: financeId,
+      });
+    });
+    res.json(financePosts);
   });
 });
 
