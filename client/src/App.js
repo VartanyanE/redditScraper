@@ -2,9 +2,16 @@ import "./App.css";
 import Button from "@mui/material/Button";
 
 function App() {
+  const data = () => {
+    fetch("http://localhost:8000/coding")
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  };
   return (
     <div className="App">
-      <Button variant="contained">Text</Button>
+      <Button variant="contained" onClick={data}>
+        Text
+      </Button>
     </div>
   );
 }

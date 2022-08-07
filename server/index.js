@@ -1,10 +1,14 @@
 const PORT = process.env.PORT || 8000;
-const express = require("express");
-const axios = require("axios");
-const cheerio = require("cheerio");
+import express from "express";
+import axios from "axios";
+import cheerio from "cheerio";
+import bodyParser from "body-parser";
+import cors from "cors";
 
 const app = express();
-
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(cors());
 const codingRoutes = [
   {
     name: "webdev",
@@ -529,7 +533,7 @@ app.get("/sports/:sportsId", async (req, res) => {
   const sportsId = req.params.sportsId;
 
   const sportsAddress = sportsRoutes.filter(
-    (sport) => sport.name === sportsId,
+    (sport) => sport.name === sportsId
   )[0].address;
 
   const sportsBase = sportsRoutes.filter((sport) => sport.name == sportsId)[0]
@@ -557,7 +561,7 @@ app.get("/crypto/:cryptoId", async (req, res) => {
   const cryptoId = req.params.cryptoId;
 
   const cryptoAddress = cryptoRoutes.filter(
-    (crypto) => crypto.name === cryptoId,
+    (crypto) => crypto.name === cryptoId
   )[0].address;
 
   const cryptoBase = cryptoRoutes.filter((crypto) => crypto.name == cryptoId)[0]
@@ -585,7 +589,7 @@ app.get("/comedy/:comedyId", async (req, res) => {
   const comedyId = req.params.comedyId;
 
   const comedyAddress = comedyRoutes.filter(
-    (comedy) => comedy.name === comedyId,
+    (comedy) => comedy.name === comedyId
   )[0].address;
 
   const comedyBase = comedyRoutes.filter((comedy) => comedy.name == comedyId)[0]
