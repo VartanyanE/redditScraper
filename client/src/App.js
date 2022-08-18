@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import Box from "@mui/material/Box";
@@ -36,10 +36,20 @@ function App() {
           <img className="cnbc" src={Cnbc} onClick={cnbcData} />
         </div>
         <br />
+        <div className="main-content">
+          {payload
+            ? payload.map((item) => (
+                <li>
+                  {" "}
+                  <a href={item.url}>{item.title}</a>{" "}
+                </li>
+              ))
+            : " "}
+        </div>
 
-        {payload
-          ? payload.map((item) => (
-              <>
+        <div className="main-content">
+          {cnbc
+            ? cnbc.map((item) => (
                 <Card variant="outlined" sx={{ maxWidth: 275 }}>
                   <CardContent>
                     <Typography
@@ -50,39 +60,11 @@ function App() {
                     <Typography variant="h7" component="div">
                       <a href={item.url}>{item.title}</a>{" "}
                     </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      r/{item.subreddit}{" "}
-                    </Typography>
-                    <Typography variant="body2"></Typography>
                   </CardContent>
                 </Card>
-              </>
-            ))
-          : " "}
-
-        {cnbc
-          ? cnbc.map((item) => (
-              <>
-                <Card variant="outlined" sx={{ maxWidth: 275 }}>
-                  <CardContent>
-                    <Typography
-                      sx={{ fontSize: 10 }}
-                      color="text.secondary"
-                      gutterBottom
-                    ></Typography>
-                    <Typography variant="h7" component="div">
-                      <a href={item.url}>{item.title}</a>{" "}
-                    </Typography>
-                    <Typography
-                      sx={{ mb: 1.5 }}
-                      color="text.secondary"
-                    ></Typography>
-                    <Typography variant="body2"></Typography>
-                  </CardContent>
-                </Card>
-              </>
-            ))
-          : " "}
+              ))
+            : " "}
+        </div>
       </div>
     </div>
   );
