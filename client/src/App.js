@@ -28,7 +28,7 @@ function App() {
 
   return (
     <div className="container">
-      <div className="card">
+      <div className="">
         <div className="reddit-image">
           <img className="reddit" src={image} onClick={redditData} />
         </div>
@@ -36,21 +36,10 @@ function App() {
           <img className="cnbc" src={Cnbc} onClick={cnbcData} />
         </div>
         <br />
-        <div className="main-content">
+        <div className="main">
           {payload
             ? payload.map((item) => (
-                <li>
-                  {" "}
-                  <a href={item.url}>{item.title}</a>{" "}
-                </li>
-              ))
-            : " "}
-        </div>
-
-        <div className="main-content">
-          {cnbc
-            ? cnbc.map((item) => (
-                <Card variant="outlined" sx={{ maxWidth: 275 }}>
+                <Card variant="outlined">
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 10 }}
@@ -58,7 +47,30 @@ function App() {
                       gutterBottom
                     ></Typography>
                     <Typography variant="h7" component="div">
-                      <a href={item.url}>{item.title}</a>{" "}
+                      <a href={item.url} target="_blank">
+                        {item.title} r/{item.subreddit}
+                      </a>{" "}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ))
+            : " "}
+        </div>
+
+        <div className="main">
+          {cnbc
+            ? cnbc.map((item) => (
+                <Card variant="outlined">
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 10 }}
+                      color="text.secondary"
+                      gutterBottom
+                    ></Typography>
+                    <Typography variant="h7" component="div">
+                      <a href={item.url} target="_blank">
+                        {item.title}
+                      </a>{" "}
                     </Typography>
                   </CardContent>
                 </Card>
