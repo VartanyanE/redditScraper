@@ -8,6 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import image from "./assets/reddit-logo.png";
 import Cnbc from "./assets/cnbc.png";
+import ResponsiveAppBar from "./components/AppBar";
 
 function App() {
   const [payload, setPayload] = useState(0);
@@ -29,6 +30,7 @@ function App() {
   return (
     <div className="container">
       <div className="">
+        <ResponsiveAppBar />
         <div className="reddit-image">
           <img className="reddit" src={image} onClick={redditData} />
         </div>
