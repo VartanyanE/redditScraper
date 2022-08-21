@@ -11,74 +11,8 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 const codingRoutes = [
   {
-    name: "webdev",
-    address: "https://www.reddit.com/r/webdev/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "programming",
-    address: "https://www.reddit.com/r/programming/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "code",
-    address: "https://www.reddit.com/r/code/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "computer_science",
-    address: "https://www.reddit.com/r/computerscience/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "coding",
-    address: "https://www.reddit.com/r/coding/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "javascript",
-    address: "https://www.reddit.com/r/javascript/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "c#",
-    address: "https://www.reddit.com/r/csharp/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "python",
-    address: "https://www.reddit.com/r/python/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "node",
-    address: "https://www.reddit.com/r/node/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "java",
-    address: "https://www.reddit.com/r/java/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "technology",
-    address: "https://www.reddit.com/r/technology/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "html",
-    address: "https://www.reddit.com/r/html/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "css",
-    address: "https://www.reddit.com/r/css/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "daily_programmer",
-    address: "https://www.reddit.com/r/dailyprogrammer/",
-    base: "https://www.reddit.com",
+    name: "cnbc",
+    address: "https://www.cnbc.com",
   },
 ];
 
@@ -364,14 +298,16 @@ codingRoutes.forEach((sub) => {
       const html = response.data;
       const $ = cheerio.load(html);
 
-      $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
-        const title = $(this).text();
+      $(`.LatestNews-headline `, html).each(function () {
+        const title = $(this).last().text();
         const url = $(this).attr("href");
+        console.log(title);
+        console.log(url);
 
         codingArray.push({
           title,
-          url: sub.base + url,
-          subreddit: sub.name,
+          url,
+          // subreddit: sub.name,
         });
       });
     })
