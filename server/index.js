@@ -270,11 +270,7 @@ const financeRoutes = [
     address: "https://www.reddit.com/r/wallstreetbets/",
     base: "https://www.reddit.com",
   },
-  {
-    name: "robinhood",
-    address: "https://www.reddit.com/r/robinhood",
-    base: "https://www.reddit.com",
-  },
+
   {
     name: "investing",
     address: "https://www.reddit.com/r/investing/",
@@ -301,8 +297,6 @@ codingRoutes.forEach((sub) => {
       $(`.LatestNews-headline `, html).each(function () {
         const title = $(this).last().text();
         const url = $(this).attr("href");
-        console.log(title);
-        console.log(url);
 
         codingArray.push({
           title,
