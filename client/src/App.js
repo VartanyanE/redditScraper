@@ -13,11 +13,11 @@ function App() {
 
   const pullData = () => {
     if (site === "Reddit") {
-      fetch("http://localhost:8000/finance/")
+      fetch("https://financeeducation.herokuapp.com/finance/")
         .then((response) => response.json())
         .then((data) => setPayload(data));
     } else if (site === "CNBC") {
-      fetch("http://localhost:8000/coding/")
+      fetch("https://financeeducation.herokuapp.com/coding/")
         .then((response) => response.json())
         .then((data) => setCnbc(data));
     }
@@ -25,11 +25,11 @@ function App() {
 
   useEffect(() => {
     if (site === "Reddit") {
-      fetch("http://localhost:8000/finance/")
+      fetch("https://financeeducation.herokuapp.com/finance/")
         .then((response) => response.json())
         .then((data) => setPayload(data));
     } else if (site === "CNBC") {
-      fetch("http://localhost:8000/coding/")
+      fetch("https://financeeducation.herokuapp.com/coding/")
         .then((response) => response.json())
         .then((data) => setCnbc(data));
     }
