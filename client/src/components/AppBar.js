@@ -15,7 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { SiteContext } from "../utils/SiteContext";
-const pages = ["Reddit", "CNBC", "WSJ"];
+const pages = ["Reddit", "CNBC", "Crypto"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const ResponsiveAppBar = (props) => {
   const { site, setSite } = useContext(SiteContext);
@@ -53,7 +53,7 @@ const ResponsiveAppBar = (props) => {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "primary",
               textDecoration: "none",
             }}
           >
