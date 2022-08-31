@@ -13,7 +13,7 @@ function App() {
   const [site, setSite] = useState("");
   const [payload, setPayload] = useState([]);
   const [cnbc, setCnbc] = useState([]);
-  const [crypto, setCrypto] = useState([]);
+  const [crypto, setCrypto] = useState([-1]);
   const options = {
     method: "GET",
     url: "https://coinranking1.p.rapidapi.com/coins",
@@ -63,17 +63,45 @@ function App() {
         .then((response) => response.json())
         .then((data) => setCnbc(data));
     }
+    axios
+      .request(options)
+      .then(function (response) {
+        setCrypto(response.data);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
   }, [site]);
   console.log(payload);
   console.log(cnbc);
-  console.log(crypto);
+  console.log(crypto.data);
 
   return (
     <SiteContext.Provider value={{ site, setSite }}>
       <div className="container">
         <div className="">
           <ResponsiveAppBar data={pullData} />
-
+          {crypto != -1 ? (
+            <div>
+              {crypto.data.coins[0].name}
+              <br />
+              {crypto.data.coins[0].price}
+              <br />
+              {crypto.data.coins[1].name}
+              <br />
+              {crypto.data.coins[1].price}
+              <br />
+              {crypto.data.coins[7].name}
+              <br />
+              {crypto.data.coins[7].price}
+              <br />
+              {crypto.data.coins[24].name}
+              <br />
+              {crypto.data.coins[24].price}
+            </div>
+          ) : (
+            ""
+          )}
           <div className="main">
             {site === "Reddit"
               ? payload.map((item) => (
