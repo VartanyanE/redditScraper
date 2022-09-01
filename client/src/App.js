@@ -8,6 +8,10 @@ import { SiteContext } from "./utils/SiteContext";
 import axios from "axios";
 import redditImage from "./assets/reddit-logo.png";
 import cnbcImage from "./assets/cnbc.png";
+import bitcoinImage from "./assets/bitcoin.png";
+import ethereumImage from "./assets/ethereum.png";
+import cardanoImage from "./assets/cardano.png";
+import ethereumclassicImage from "./assets/ethereumclassic.png";
 
 function App() {
   const [site, setSite] = useState("");
@@ -83,21 +87,29 @@ function App() {
           <ResponsiveAppBar data={pullData} />
           {crypto != -1 ? (
             <div>
-              {crypto.data.coins[0].name}
+              <img
+                src={bitcoinImage}
+                style={{ height: "20px", width: "20px" }}
+              />{" "}
+              {crypto.data.coins[0].name}------ ${crypto.data.coins[0].price}
               <br />
-              {crypto.data.coins[0].price}
+              <img
+                src={ethereumImage}
+                style={{ height: "20px", width: "20px" }}
+              />{" "}
+              {crypto.data.coins[1].name}------- ${crypto.data.coins[1].price}
               <br />
-              {crypto.data.coins[1].name}
+              <img
+                src={cardanoImage}
+                style={{ height: "20px", width: "20px" }}
+              />{" "}
+              {crypto.data.coins[7].name}------- ${crypto.data.coins[7].price}
               <br />
-              {crypto.data.coins[1].price}
-              <br />
-              {crypto.data.coins[7].name}
-              <br />
-              {crypto.data.coins[7].price}
-              <br />
-              {crypto.data.coins[24].name}
-              <br />
-              {crypto.data.coins[24].price}
+              <img
+                src={ethereumclassicImage}
+                style={{ height: "20px", width: "20px" }}
+              />{" "}
+              {crypto.data.coins[25].name}------ ${crypto.data.coins[25].price}
             </div>
           ) : (
             ""
