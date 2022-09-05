@@ -17,6 +17,8 @@ function App() {
   const [site, setSite] = useState("");
   const [payload, setPayload] = useState([]);
   const [cnbc, setCnbc] = useState([]);
+  const [coindesk, setCoindesk] = useState([]);
+
   const [crypto, setCrypto] = useState([-1]);
   const options = {
     method: "GET",
@@ -45,6 +47,10 @@ function App() {
       fetch("https://financeeducation.herokuapp.com/coding/")
         .then((response) => response.json())
         .then((data) => setCnbc(data));
+    } else if (site === "Coindesk") {
+      fetch("https://financeeducation.herokuapp.com/coindesk/")
+        .then((response) => response.json())
+        .then((data) => setCnbc(data));
     } else if (site === "Crypto") {
       axios
         .request(options)
@@ -66,6 +72,10 @@ function App() {
       fetch("https://financeeducation.herokuapp.com/coding/")
         .then((response) => response.json())
         .then((data) => setCnbc(data));
+    } else if (site === "Coindesk") {
+      fetch("https://financeeducation.herokuapp.com/coindesk/")
+        .then((response) => response.json())
+        .then((data) => setCoindesk(data));
     }
     axios
       .request(options)
@@ -86,30 +96,31 @@ function App() {
         <div className="">
           <ResponsiveAppBar data={pullData} />
           {crypto != -1 ? (
-            <div>
+            <div className="crypto">
               <img
                 src={bitcoinImage}
                 style={{ height: "20px", width: "20px" }}
               />{" "}
-              {crypto.data.coins[0].name}------ ${crypto.data.coins[0].price}
+              {crypto.data.coins[0].name}- ${crypto.data.coins[0].price}
               <br />
               <img
                 src={ethereumImage}
                 style={{ height: "20px", width: "20px" }}
               />{" "}
-              {crypto.data.coins[1].name}------- ${crypto.data.coins[1].price}
+              {crypto.data.coins[1].name}-$
+              {crypto.data.coins[1].price}
               <br />
               <img
                 src={cardanoImage}
                 style={{ height: "20px", width: "20px" }}
               />{" "}
-              {crypto.data.coins[7].name}------- ${crypto.data.coins[7].price}
+              {crypto.data.coins[6].name}-${crypto.data.coins[6].price}
               <br />
               <img
                 src={ethereumclassicImage}
                 style={{ height: "20px", width: "20px" }}
               />{" "}
-              {crypto.data.coins[25].name}------ ${crypto.data.coins[25].price}
+              {crypto.data.coins[25].name}-${crypto.data.coins[25].price}
             </div>
           ) : (
             ""
@@ -143,6 +154,31 @@ function App() {
           <div className="main">
             {site === "CNBC"
               ? cnbc.map((item) => (
+                  <Card variant="outlined" className="cnbc">
+                    <CardContent>
+                      <Typography
+                        sx={{ fontSize: 10 }}
+                        color="text.secondary"
+                        gutterBottom
+                      ></Typography>
+                      <Typography variant="h7" component="div">
+                        <img
+                          src={cnbcImage}
+                          style={{ height: "30px", width: "30px" }}
+                        />{" "}
+                        <br />
+                        <a href={item.url} target="_blank">
+                          {item.title}
+                        </a>{" "}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                ))
+              : " "}
+          </div>
+          <div className="main">
+            {site === "Coindesk"
+              ? coindesk.map((item) => (
                   <Card variant="outlined" className="cnbc">
                     <CardContent>
                       <Typography

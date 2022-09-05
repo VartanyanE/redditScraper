@@ -24,236 +24,10 @@ const codingRoutes = [
   },
 ];
 
-const sportsRoutes = [
+const coindeskRoutes = [
   {
-    name: "nfl",
-    address: "https://www.reddit.com/r/nfl/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "nba",
-    address: "https://www.reddit.com/r/nba/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "soccer",
-    address: "https://www.reddit.com/r/soccer/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "hockey",
-    address: "https://www.reddit.com/r/hockey/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "baseball",
-    address: "https://www.reddit.com/r/baseball/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "golf",
-    address: "https://www.reddit.com/r/golf/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "sports",
-    address: "https://www.reddit.com/r/sports/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "premierLeague",
-    address: "https://www.reddit.com/r/premierleague/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "formula1",
-    address: "https://www.reddit.com/r/formula1/",
-    base: "https://www.reddit.com",
-  },
-];
-
-const cryptoRoutes = [
-  {
-    name: "crypto",
-    address: "https://www.reddit.com/r/crypto/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "crypto_currency_news",
-    address: "https://www.reddit.com/r/crypto_currency_news/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "cryptocurrencies",
-    address: "https://www.reddit.com/r/cryptocurrencies/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "shibarmy",
-    address: "https://www.reddit.com/r/shibarmy/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "cryptomoonshots",
-    address: "https://www.reddit.com/r/cryptomoonshots/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "bitcoin",
-    address: "https://www.reddit.com/r/bitcoin/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "dogecoin",
-    address: "https://www.reddit.com/r/dogecoin/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "ethereum",
-    address: "https://www.reddit.com/r/ethereum/",
-    base: "https://www.reddit.com",
-  },
-];
-
-const comedyRoutes = [
-  {
-    name: "comedyheaven",
-    address: "https://www.reddit.com/r/comedyheaven/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "funny",
-    address: "https://www.reddit.com/r/funny/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "standupcomedy",
-    address: "https://www.reddit.com/r/standupcomedy/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "dankmemes",
-    address: "https://www.reddit.com/r/dankmemes/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "jokes",
-    address: "https://www.reddit.com/r/jokes/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "funnyandsad",
-    address: "https://www.reddit.com/r/funnyandsad/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "comedycemetery",
-    address: "https://www.reddit.com/r/comedycemetery/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "funnyvideos",
-    address: "https://www.reddit.com/r/funnyvideos/",
-    base: "https://www.reddit.com",
-  },
-];
-
-const newsRoutes = [
-  {
-    name: "news",
-    address: "https://www.reddit.com/r/news/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "conspiracy",
-    address: "https://www.reddit.com/r/conspiracy/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "politics",
-    address: "https://www.reddit.com/r/politics/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "worldnews",
-    address: "https://www.reddit.com/r/worldnews/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "conservative",
-    address: "https://www.reddit.com/r/conservative/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "democrats",
-    address: "https://www.reddit.com/r/democrats/",
-    base: "https://www.reddit.com",
-  },
-];
-
-const musicRoutes = [
-  {
-    name: "music",
-    address: "https://www.reddit.com/r/music/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "letstalkmusic",
-    address: "https://www.reddit.com/r/letstalkmusic/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "hiphopheads",
-    address: "https://www.reddit.com/r/hiphopheads/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "guitar",
-    address: "https://www.reddit.com/r/guitar/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "electronicmusic",
-    address: "https://www.reddit.com/r/electronicmusic/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "spotify",
-    address: "https://www.reddit.com/r/spotify/",
-    base: "https://www.reddit.com",
-  },
-];
-
-const memeRoutes = [
-  {
-    name: "meme",
-    address: "https://www.reddit.com/r/meme/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "memesofthedank",
-    address: "https://www.reddit.com/r/memes_of_the_dank/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "dankmemes",
-    address: "https://www.reddit.com/r/dankmemes/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "memes",
-    address: "https://www.reddit.com/r/memes/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "historymemes",
-    address: "https://www.reddit.com/r/historymemes/",
-    base: "https://www.reddit.com",
-  },
-  {
-    name: "memeeconomy",
-    address: "https://www.reddit.com/r/memeeconomy/",
-    base: "https://www.reddit.com",
+    name: "coindesk",
+    address: "https://www.coindesk.com/",
   },
 ];
 
@@ -287,13 +61,10 @@ const financeRoutes = [
 ];
 
 const codingArray = [];
-const sportsArray = [];
-const cryptoArray = [];
-const comedyArray = [];
-const newsArray = [];
-const musicArray = [];
-const memeArray = [];
+
 const financeArray = [];
+
+const coindeskArray = [];
 
 codingRoutes.forEach((sub) => {
   axios
@@ -310,132 +81,6 @@ codingRoutes.forEach((sub) => {
           title,
           url,
           // subreddit: sub.name,
-        });
-      });
-    })
-    .catch((err) => console.log(err));
-});
-
-sportsRoutes.forEach((sub) => {
-  axios
-    .get(sub.address)
-    .then((response) => {
-      const html = response.data;
-      const $ = cheerio.load(html);
-
-      $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
-        const title = $(this).text();
-        const url = $(this).attr("href");
-
-        sportsArray.push({
-          title,
-          url: sub.base + url,
-          subreddit: sub.name,
-        });
-      });
-    })
-    .catch((err) => console.log(err));
-});
-
-cryptoRoutes.forEach((sub) => {
-  axios
-    .get(sub.address)
-    .then((response) => {
-      const html = response.data;
-      const $ = cheerio.load(html);
-
-      $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
-        const title = $(this).text();
-        const url = $(this).attr("href");
-
-        cryptoArray.push({
-          title,
-          url: sub.base + url,
-          subreddit: sub.name,
-        });
-      });
-    })
-    .catch((err) => console.log(err));
-});
-
-comedyRoutes.forEach((sub) => {
-  axios
-    .get(sub.address)
-    .then((response) => {
-      const html = response.data;
-      const $ = cheerio.load(html);
-
-      $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
-        const title = $(this).text();
-        const url = $(this).attr("href");
-
-        comedyArray.push({
-          title,
-          url: sub.base + url,
-          subreddit: sub.name,
-        });
-      });
-    })
-    .catch((err) => console.log(err));
-});
-
-newsRoutes.forEach((sub) => {
-  axios
-    .get(sub.address)
-    .then((response) => {
-      const html = response.data;
-      const $ = cheerio.load(html);
-
-      $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
-        const title = $(this).text();
-        const url = $(this).attr("href");
-
-        newsArray.push({
-          title,
-          url: sub.base + url,
-          subreddit: sub.name,
-        });
-      });
-    })
-    .catch((err) => console.log(err));
-});
-
-musicRoutes.forEach((sub) => {
-  axios
-    .get(sub.address)
-    .then((response) => {
-      const html = response.data;
-      const $ = cheerio.load(html);
-
-      $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
-        const title = $(this).text();
-        const url = $(this).attr("href");
-
-        musicArray.push({
-          title,
-          url: sub.base + url,
-          subreddit: sub.name,
-        });
-      });
-    })
-    .catch((err) => console.log(err));
-});
-
-memeRoutes.forEach((sub) => {
-  axios
-    .get(sub.address)
-    .then((response) => {
-      const html = response.data;
-      const $ = cheerio.load(html);
-
-      $(`.SQnoC3ObvgnGjWt90zD9Z `, html).each(function () {
-        const title = $(this).text();
-        const url = $(this).attr("href");
-
-        memeArray.push({
-          title,
-          url: sub.base + url,
-          subreddit: sub.name,
         });
       });
     })
@@ -463,6 +108,28 @@ financeRoutes.forEach((sub) => {
     .catch((err) => console.log(err));
 });
 
+coindeskRoutes.forEach((sub) => {
+  axios
+    .get(sub.address)
+    .then((response) => {
+      const html = response.data;
+      const $ = cheerio.load(html);
+
+      $(`.card-titlestyles__CardTitleWrapper-sc-1ptmy9y-0 `, html).each(
+        function () {
+          const title = $(this).text();
+          const url = $(this).attr("href");
+
+          coindeskArray.push({
+            title,
+            url: `${"https://www.coindesk.com" + url}`,
+          });
+        }
+      );
+    })
+    .catch((err) => console.log(err));
+});
+
 app.get("/", (req, res) => {
   res.json("Welcome");
 });
@@ -471,32 +138,12 @@ app.get("/coding", (req, res) => {
   res.json(codingArray);
 });
 
-app.get("/sports", (req, res) => {
-  res.json(sportsArray);
-});
-
-app.get("/crypto", (req, res) => {
-  res.json(cryptoArray);
-});
-
-app.get("/comedy", (req, res) => {
-  res.json(comedyArray);
-});
-
-app.get("/news", (req, res) => {
-  res.json(newsArray);
-});
-
-app.get("/music", (req, res) => {
-  res.json(musicArray);
-});
-
-app.get("/meme", (req, res) => {
-  res.json(memeArray);
-});
-
 app.get("/finance", (req, res) => {
   res.json(financeArray);
+});
+
+app.get("/coindesk", (req, res) => {
+  res.json(coindeskArray);
 });
 
 app.get("/coding/:codingId", async (req, res) => {
