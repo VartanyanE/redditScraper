@@ -12,6 +12,7 @@ import bitcoinImage from "./assets/bitcoin.png";
 import ethereumImage from "./assets/ethereum.png";
 import cardanoImage from "./assets/cardano.png";
 import ethereumclassicImage from "./assets/ethereumclassic.png";
+import coindeskImage from "./assets/coindesk.png";
 
 function App() {
   const [site, setSite] = useState("");
@@ -179,7 +180,7 @@ function App() {
           <div className="main">
             {site === "Coindesk"
               ? coindesk.map((item) => (
-                  <Card variant="outlined" className="cnbc">
+                  <Card variant="outlined" className="coindesk">
                     <CardContent>
                       <Typography
                         sx={{ fontSize: 10 }}
@@ -188,7 +189,7 @@ function App() {
                       ></Typography>
                       <Typography variant="h7" component="div">
                         <img
-                          src={cnbcImage}
+                          src={coindeskImage}
                           style={{ height: "30px", width: "30px" }}
                         />{" "}
                         <br />

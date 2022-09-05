@@ -12,10 +12,9 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { SiteContext } from "../utils/SiteContext";
-const pages = ["Reddit", "CNBC", "Crypto"];
+const pages = ["Reddit", "CNBC", "Coindesk"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const ResponsiveAppBar = (props) => {
   const { site, setSite } = useContext(SiteContext);
