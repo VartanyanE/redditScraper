@@ -42,10 +42,14 @@ a:active {
 .container {
   height: 100%;
   width: auto;
+  position: relative;
 }
 .main {
   width: 100%;
   background-color: rgb(0, 121, 211) !important;
+  position: relative;
+  top: 30px !important;
+  left: 0;
 }
 
 .crypto {
@@ -54,6 +58,10 @@ a:active {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-size: small;
+  position: relative;
+  top: 57px !important;
+  left: 0;
+  
 }
 
 .reddit-image {
@@ -78,11 +86,17 @@ a:active {
 .cnbc {
   width: 100%;
   background-color: rgb(205, 0, 75) !important;
+  position: relative;
+  top: 27px !important;
+  left: 0;
 }
 
 .coindesk {
   width: 100%;
   background-color: rgb(93, 95, 123) !important;
+  position: relative;
+  top: 27px !important;
+  left: 0;
 }
 
 #myVideo {
@@ -94,3 +108,5 @@ a:active {
   left: 0;
   z-index: -1;
 }
+
+

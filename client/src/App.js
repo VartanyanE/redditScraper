@@ -8,10 +8,7 @@ import { SiteContext } from "./utils/SiteContext";
 import axios from "axios";
 import redditImage from "./assets/reddit-logo.png";
 import cnbcImage from "./assets/cnbc.png";
-import bitcoinImage from "./assets/bitcoin.png";
-import ethereumImage from "./assets/ethereum.png";
-import cardanoImage from "./assets/cardano.png";
-import ethereumclassicImage from "./assets/ethereumclassic.png";
+
 import coindeskImage from "./assets/coindesk.png";
 import background from "./assets/background.mp4";
 

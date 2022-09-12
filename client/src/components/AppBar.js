@@ -38,7 +38,7 @@ const ResponsiveAppBar = (props) => {
   };
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" style={{ marginBottom: "200px" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
