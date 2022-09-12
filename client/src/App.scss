@@ -2,8 +2,6 @@
 
 * {
   font-family: "Roboto", sans-serif;
-
- 
 }
 
 a {
@@ -53,13 +51,10 @@ a:active {
 .crypto {
   background-color: rgb(14, 14, 15) !important;
   color: aliceblue !important;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-size: small;
-
 }
-
-
-
 
 .reddit-image {
   width: 100px;
@@ -81,20 +76,21 @@ a:active {
 }
 
 .cnbc {
+  width: 100%;
+  background-color: rgb(205, 0, 75) !important;
+}
 
-    width: 100%;
-    background-color: rgb(205, 0, 75) !important;
-  }
+.coindesk {
+  width: 100%;
+  background-color: rgb(93, 95, 123) !important;
+}
 
-  .coindesk {
-
-    width: 100%;
-    background-color: rgb(93, 95, 123) !important;
-  }
-
-  #myVideo {
-    position: fixed;
-    z-index: -1;
-    width: 100%;
-  }
-
+#myVideo {
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}

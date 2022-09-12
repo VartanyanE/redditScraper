@@ -96,7 +96,7 @@ function App() {
     <SiteContext.Provider value={{ site, setSite }}>
       <div className="container">
         <ResponsiveAppBar data={pullData} />
-        <video autoPlay muted loop id="myVideo">
+        <video autoPlay muted playsInline loop id="myVideo">
           <source src={background} type="video/mp4" />
         </video>
         {site === "Crypto"
