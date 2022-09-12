@@ -13,6 +13,7 @@ import ethereumImage from "./assets/ethereum.png";
 import cardanoImage from "./assets/cardano.png";
 import ethereumclassicImage from "./assets/ethereumclassic.png";
 import coindeskImage from "./assets/coindesk.png";
+import background from "./assets/background.mp4";
 
 function App() {
   const [site, setSite] = useState("");
@@ -81,7 +82,7 @@ function App() {
     axios
       .request(options)
       .then(function (response) {
-        setCrypto(response.data);
+        setCrypto(response.data.data.coins);
       })
       .catch(function (error) {
         console.error(error);
@@ -89,119 +90,97 @@ function App() {
   }, [site]);
   console.log(payload);
   console.log(cnbc);
-  console.log(crypto.data);
+  console.log(crypto);
 
   return (
     <SiteContext.Provider value={{ site, setSite }}>
       <div className="container">
-        <div className="">
-          <ResponsiveAppBar data={pullData} />
-          {crypto != -1 ? (
-            <div className="crypto">
-              <img
-                src={bitcoinImage}
-                style={{ height: "20px", width: "20px" }}
-              />{" "}
-              {crypto.data.coins[0].name}- ${crypto.data.coins[0].price}
-              <br />
-              <img
-                src={ethereumImage}
-                style={{ height: "20px", width: "20px" }}
-              />{" "}
-              {crypto.data.coins[1].name}-$
-              {crypto.data.coins[1].price}
-              <br />
-              <img
-                src={cardanoImage}
-                style={{ height: "20px", width: "20px" }}
-              />{" "}
-              {crypto.data.coins[6].name}-${crypto.data.coins[6].price}
-              <br />
-              <img
-                src={ethereumclassicImage}
-                style={{ height: "20px", width: "20px" }}
-              />{" "}
-              {crypto.data.coins[25].name}-${crypto.data.coins[25].price}
-            </div>
-          ) : (
-            ""
-          )}
-          <div className="main">
-            {site === "Reddit"
-              ? payload.map((item) => (
-                  <Card className="main" variant="outlined">
-                    <CardContent>
-                      <Typography
-                        sx={{ fontSize: 10 }}
-                        color="text.secondary"
-                        gutterBottom
-                      ></Typography>
-                      <Typography variant="h7" component="div">
-                        <img
-                          src={redditImage}
-                          style={{ height: "30px", width: "30px" }}
-                        />{" "}
-                        <br />
-                        <a href={item.url} target="_blank">
-                          {item.title} r/{item.subreddit}
-                        </a>{" "}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                ))
-              : " "}
-          </div>
+        <ResponsiveAppBar data={pullData} />
+        <video autoPlay muted loop id="myVideo">
+          <source src={background} type="video/mp4" />
+        </video>
+        {site === "Crypto"
+          ? crypto.map((item) => (
+              <div className="crypto">
+                {item.rank} {item.name}- ${item.price}
+              </div>
+            ))
+          : ""}
+        <div className="main">
+          {site === "Reddit"
+            ? payload.map((item) => (
+                <Card className="main" variant="outlined">
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 10 }}
+                      color="text.secondary"
+                      gutterBottom
+                    ></Typography>
+                    <Typography variant="h7" component="div">
+                      <img
+                        src={redditImage}
+                        style={{ height: "30px", width: "30px" }}
+                      />{" "}
+                      <br />
+                      <a href={item.url} target="_blank">
+                        {item.title} r/{item.subreddit}
+                      </a>{" "}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ))
+            : " "}
+        </div>
 
-          <div className="main">
-            {site === "CNBC"
-              ? cnbc.map((item) => (
-                  <Card variant="outlined" className="cnbc">
-                    <CardContent>
-                      <Typography
-                        sx={{ fontSize: 10 }}
-                        color="text.secondary"
-                        gutterBottom
-                      ></Typography>
-                      <Typography variant="h7" component="div">
-                        <img
-                          src={cnbcImage}
-                          style={{ height: "30px", width: "30px" }}
-                        />{" "}
-                        <br />
-                        <a href={item.url} target="_blank">
-                          {item.title}
-                        </a>{" "}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                ))
-              : " "}
-          </div>
-          <div className="main">
-            {site === "Coindesk"
-              ? coindesk.map((item) => (
-                  <Card variant="outlined" className="coindesk">
-                    <CardContent>
-                      <Typography
-                        sx={{ fontSize: 10 }}
-                        color="text.secondary"
-                        gutterBottom
-                      ></Typography>
-                      <Typography variant="h7" component="div">
-                        <img
-                          src={coindeskImage}
-                          style={{ height: "30px", width: "30px" }}
-                        />{" "}
-                        <br />
-                        <a href={item.url} target="_blank">
-                          {item.title}
-                        </a>{" "}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                ))
-              : " "}
-          </div>
+        <div className="main">
+          {site === "CNBC"
+            ? cnbc.map((item) => (
+                <Card variant="outlined" className="cnbc">
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 10 }}
+                      color="text.secondary"
+                      gutterBottom
+                    ></Typography>
+                    <Typography variant="h7" component="div">
+                      <img
+                        src={cnbcImage}
+                        style={{ height: "30px", width: "30px" }}
+                      />{" "}
+                      <br />
+                      <a href={item.url} target="_blank">
+                        {item.title}
+                      </a>{" "}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ))
+            : " "}
+        </div>
+        <div className="main">
+          {site === "Coindesk"
+            ? coindesk.map((item) => (
+                <Card variant="outlined" className="coindesk">
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 10 }}
+                      color="text.secondary"
+                      gutterBottom
+                    ></Typography>
+                    <Typography variant="h7" component="div">
+                      <img
+                        src={coindeskImage}
+                        style={{ height: "30px", width: "30px" }}
+                      />{" "}
+                      <br />
+                      <a href={item.url} target="_blank">
+                        {item.title}
+                      </a>{" "}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ))
+            : " "}
         </div>
       </div>
     </SiteContext.Provider>

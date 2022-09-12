@@ -14,8 +14,8 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { SiteContext } from "../utils/SiteContext";
-const pages = ["Reddit", "CNBC", "Coindesk"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["Reddit", "CNBC", "Coindesk", "Crypto"];
+const settings = ["Crypto", "Account", "Dashboard", "Logout"];
 const ResponsiveAppBar = (props) => {
   const { site, setSite } = useContext(SiteContext);
   console.log(site);
@@ -166,7 +166,7 @@ const ResponsiveAppBar = (props) => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
