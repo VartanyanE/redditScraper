@@ -102,7 +102,8 @@ function App() {
         {site === "Crypto"
           ? crypto.map((item) => (
               <div className="crypto">
-                {item.rank} {item.name}- ${item.price}
+                {item.rank} {item.name}-{" "}
+                <strong style={{ color: "green" }}>${item.price}</strong>
               </div>
             ))
           : ""}
