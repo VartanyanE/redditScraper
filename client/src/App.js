@@ -8,7 +8,7 @@ import { SiteContext } from "./utils/SiteContext";
 import axios from "axios";
 import redditImage from "./assets/reddit-logo.png";
 import cnbcImage from "./assets/cnbc.png";
-
+import backgroundImage from "./assets/background.png";
 import coindeskImage from "./assets/coindesk.png";
 import background from "./assets/background.mp4";
 
@@ -93,7 +93,18 @@ function App() {
     <SiteContext.Provider value={{ site, setSite }}>
       <div className="container">
         <ResponsiveAppBar data={pullData} />
-        <video
+        <div
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            height: 900,
+          }}
+        >
+          Hello World
+        </div>
+        {/* <video
           autoPlay
           controls="controls"
           preload="auto"
@@ -103,11 +114,11 @@ function App() {
           id="myVideo"
         >
           <source src={background} type="video/mp4" />
-        </video>
+        </video> */}
         {site === "Crypto"
           ? crypto.map((item) => (
               <div className="crypto">
-                {item.rank} {item.name}-{" "}
+                {item.rank} {item.name} ({item.symbol})-{" "}
                 <strong style={{ color: "green" }}>${item.price}</strong>
               </div>
             ))
