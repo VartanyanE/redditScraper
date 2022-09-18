@@ -17,6 +17,7 @@ function App() {
   const [payload, setPayload] = useState([]);
   const [cnbc, setCnbc] = useState([]);
   const [coindesk, setCoindesk] = useState([]);
+  const [background, setBackground] = useState(true);
 
   const [crypto, setCrypto] = useState([-1]);
   const options = {
@@ -93,7 +94,9 @@ function App() {
     <SiteContext.Provider value={{ site, setSite }}>
       <div className="container">
         <ResponsiveAppBar data={pullData} />
+
         <div
+          className="backgroundImage"
           style={{
             backgroundImage: `url(${backgroundImage})`,
             backgroundPosition: "center",
@@ -102,8 +105,10 @@ function App() {
             height: 900,
           }}
         >
-          Hello World
+          {" "}
+          g
         </div>
+
         {/* <video
           autoPlay
           controls="controls"
