@@ -10,7 +10,6 @@ import redditImage from "./assets/reddit-logo.png";
 import cnbcImage from "./assets/cnbc.png";
 import backgroundImage from "./assets/background.png";
 import coindeskImage from "./assets/coindesk.png";
-import background from "./assets/background.mp4";
 
 function App() {
   const [site, setSite] = useState("");
@@ -39,6 +38,8 @@ function App() {
   };
 
   const pullData = () => {
+    setBackground(false);
+
     if (site === "Reddit") {
       fetch("https://financeeducation.herokuapp.com/finance/")
         .then((response) => response.json())
@@ -52,6 +53,8 @@ function App() {
         .then((response) => response.json())
         .then((data) => setCnbc(data));
     } else if (site === "Crypto") {
+      // setBackground(false);
+
       axios
         .request(options)
         .then(function (response) {
@@ -61,6 +64,7 @@ function App() {
           console.error(error);
         });
     }
+    console.log(background);
   };
 
   useEffect(() => {
@@ -94,20 +98,22 @@ function App() {
     <SiteContext.Provider value={{ site, setSite }}>
       <div className="container">
         <ResponsiveAppBar data={pullData} />
-
-        <div
-          className="backgroundImage"
-          style={{
-            backgroundImage: `url(${backgroundImage})`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            height: 900,
-          }}
-        >
-          {" "}
-          g
-        </div>
+        {background ? (
+          <div
+            style={{
+              backgroundImage: `url(${backgroundImage})`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              height: 900,
+            }}
+          >
+            {" "}
+            g
+          </div>
+        ) : (
+          ""
+        )}
 
         {/* <video
           autoPlay
