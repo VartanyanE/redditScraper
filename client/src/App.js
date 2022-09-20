@@ -10,6 +10,7 @@ import redditImage from "./assets/reddit-logo.png";
 import cnbcImage from "./assets/cnbc.png";
 import backgroundImage from "./assets/background.png";
 import coindeskImage from "./assets/coindesk.png";
+import yahooImage from "./assets/yahoo.png";
 
 function App() {
   const [site, setSite] = useState("");
@@ -19,6 +20,8 @@ function App() {
   const [background, setBackground] = useState(true);
 
   const [crypto, setCrypto] = useState([-1]);
+  const [yahooData, setYahooData] = useState([-1]);
+
   const options = {
     method: "GET",
     url: "https://coinranking1.p.rapidapi.com/coins",
@@ -34,6 +37,16 @@ function App() {
     headers: {
       "X-RapidAPI-Key": "3712cf1d6cmshb54d0c7fbc4a044p107200jsn8b9476230474",
       "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
+    },
+  };
+
+  const yahoo = {
+    method: "GET",
+    url: "https://apidojo-yahoo-finance-v1.p.rapidapi.com/auto-complete",
+    params: { q: "tesla", region: "US" },
+    headers: {
+      "X-RapidAPI-Key": "3712cf1d6cmshb54d0c7fbc4a044p107200jsn8b9476230474",
+      "X-RapidAPI-Host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
     },
   };
 
@@ -63,8 +76,19 @@ function App() {
         .catch(function (error) {
           console.error(error);
         });
+    } else if (site === "Yahoo") {
+      // setBackground(false);
+
+      axios
+        .request(yahoo)
+        .then(function (response) {
+          setYahooData(response.data.news);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    } else if (site === "Credit Score") {
     }
-    console.log(background);
   };
 
   useEffect(() => {
@@ -89,10 +113,19 @@ function App() {
       .catch(function (error) {
         console.error(error);
       });
+
+    axios
+      .request(yahoo)
+      .then(function (response) {
+        setYahooData(response.data.news);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
   }, [site]);
   console.log(payload);
   console.log(cnbc);
-  console.log(crypto);
+  console.log(yahooData);
 
   return (
     <SiteContext.Provider value={{ site, setSite }}>
@@ -202,6 +235,32 @@ function App() {
                       />{" "}
                       <br />
                       <a href={item.url} target="_blank">
+                        {item.title}
+                      </a>{" "}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ))
+            : " "}
+        </div>
+
+        <div className="main">
+          {site === "Yahoo"
+            ? yahooData.map((item) => (
+                <Card variant="outlined" className="yahoo">
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 10 }}
+                      color="text.secondary"
+                      gutterBottom
+                    ></Typography>
+                    <Typography variant="h7" component="div">
+                      <img
+                        src={yahooImage}
+                        style={{ height: "30px", width: "30px" }}
+                      />{" "}
+                      <br />
+                      <a href={item.link} target="_blank">
                         {item.title}
                       </a>{" "}
                     </Typography>

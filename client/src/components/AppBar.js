@@ -14,8 +14,9 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { SiteContext } from "../utils/SiteContext";
-const pages = ["Reddit", "CNBC", "Coindesk", "Crypto"];
-const settings = ["Crypto", "Account", "Dashboard", "Logout"];
+import avatar from "../assets/avatar.png";
+const pages = ["Reddit", "CNBC", "Coindesk", "Yahoo"];
+const settings = ["Crypto", "Credit Score", "Dashboard", "Logout"];
 const ResponsiveAppBar = (props) => {
   const { site, setSite } = useContext(SiteContext);
   console.log(site);
@@ -38,7 +39,7 @@ const ResponsiveAppBar = (props) => {
   };
 
   return (
-    <AppBar position="fixed" style={{ marginBottom: "200px" }}>
+    <AppBar position="fixed" style={{ marginBottom: "200px", color: "black" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -146,7 +147,7 @@ const ResponsiveAppBar = (props) => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="" />
+                <Avatar alt="Remy Sharp" src={avatar} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -166,7 +167,14 @@ const ResponsiveAppBar = (props) => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => {
+                    handleCloseUserMenu();
+                    setSite(setting);
+                    props.data();
+                  }}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
