@@ -16,7 +16,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { SiteContext } from "../utils/SiteContext";
 import avatar from "../assets/avatar.png";
 const pages = ["Reddit", "CNBC", "Coindesk", "Yahoo"];
-const settings = ["Crypto", "Credit Score", "Dashboard", "Logout"];
+const settings = ["Crypto", "Credit Score"];
 const ResponsiveAppBar = (props) => {
   const { site, setSite } = useContext(SiteContext);
   console.log(site);

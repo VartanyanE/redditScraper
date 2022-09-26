@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useState, createContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -88,6 +88,7 @@ function App() {
           console.error(error);
         });
     } else if (site === "Credit Score") {
+      window.location.href = "https://www.creditkarma.com/";
     }
   };
 
@@ -104,6 +105,8 @@ function App() {
       fetch("https://financeeducation.herokuapp.com/coindesk/")
         .then((response) => response.json())
         .then((data) => setCoindesk(data));
+    } else if (site === "Credit Score") {
+      window.location.href = "https://www.creditkarma.com/";
     }
     axios
       .request(options)
