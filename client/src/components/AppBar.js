@@ -15,8 +15,15 @@ import MenuItem from "@mui/material/MenuItem";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { SiteContext } from "../utils/SiteContext";
 import avatar from "../assets/avatar.png";
-const pages = ["Reddit", "CNBC", "Coindesk", "Yahoo"];
-const settings = ["Crypto", "Credit Score"];
+
+const pages = ["Coindesk", "CNBC", "Crypto", "Reddit", "Yahoo"];
+const settings = [
+  "American Express",
+  "Chase",
+  "Coinbase",
+  "Credit Score",
+  "Robinhood",
+];
 const ResponsiveAppBar = (props) => {
   const { site, setSite } = useContext(SiteContext);
   console.log(site);

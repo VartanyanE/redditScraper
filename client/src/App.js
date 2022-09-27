@@ -89,6 +89,14 @@ function App() {
         });
     } else if (site === "Credit Score") {
       window.location.href = "https://www.creditkarma.com/";
+    } else if (site === "Robinhood") {
+      window.location.href = "https://www.robinhood.com/";
+    } else if (site === "Chase") {
+      window.location.href = "https://www.chase.com/";
+    } else if (site === "American Express") {
+      window.location.href = "https://www.americanexpress.com/";
+    } else if (site === "Coinbase") {
+      window.location.href = "https://www.coinbase.com/";
     }
   };
 
@@ -107,6 +115,14 @@ function App() {
         .then((data) => setCoindesk(data));
     } else if (site === "Credit Score") {
       window.location.href = "https://www.creditkarma.com/";
+    } else if (site === "Robinhood") {
+      window.location.href = "https://www.robinhood.com/";
+    } else if (site === "Chase") {
+      window.location.href = "https://www.chase.com/";
+    } else if (site === "American Express") {
+      window.location.href = "https://www.americanexpress.com/";
+    } else if (site === "Coinbase") {
+      window.location.href = "https://www.coinbase.com/";
     }
     axios
       .request(options)
