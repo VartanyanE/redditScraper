@@ -11,6 +11,7 @@ import cnbcImage from "./assets/cnbc.png";
 import backgroundImage from "./assets/background.png";
 import coindeskImage from "./assets/coindesk.png";
 import yahooImage from "./assets/yahoo.png";
+import MoveStuffAround from "./components/Ticker";
 
 function App() {
   const [site, setSite] = useState("");
@@ -42,11 +43,10 @@ function App() {
 
   const yahoo = {
     method: "GET",
-    url: "https://apidojo-yahoo-finance-v1.p.rapidapi.com/auto-complete",
-    params: { q: "tesla", region: "US" },
+    url: "https://yahoo-finance15.p.rapidapi.com/api/yahoo/ne/news",
     headers: {
-      "X-RapidAPI-Key": "3712cf1d6cmshb54d0c7fbc4a044p107200jsn8b9476230474",
-      "X-RapidAPI-Host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
+      "X-RapidAPI-Key": "a55981e29amsh474209918c2f0eap1b8fb4jsn84b08394e42a",
+      "X-RapidAPI-Host": "yahoo-finance15.p.rapidapi.com",
     },
   };
 
@@ -82,7 +82,7 @@ function App() {
       axios
         .request(yahoo)
         .then(function (response) {
-          setYahooData(response.data.news);
+          setYahooData(response.data);
         })
         .catch(function (error) {
           console.error(error);
@@ -136,7 +136,7 @@ function App() {
     axios
       .request(yahoo)
       .then(function (response) {
-        setYahooData(response.data.news);
+        setYahooData(response.data);
       })
       .catch(function (error) {
         console.error(error);
@@ -150,6 +150,7 @@ function App() {
     <SiteContext.Provider value={{ site, setSite }}>
       <div className="container">
         <ResponsiveAppBar data={pullData} />
+
         {background ? (
           <div
             style={{
@@ -167,17 +168,6 @@ function App() {
           ""
         )}
 
-        {/* <video
-          autoPlay
-          controls="controls"
-          preload="auto"
-          muted
-          playsInline
-          loop
-          id="myVideo"
-        >
-          <source src={background} type="video/mp4" />
-        </video> */}
         {site === "Crypto"
           ? crypto.map((item) => (
               <div className="crypto">
